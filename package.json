@@ -1,0 +1,17 @@
+{
+  "name": "beeceptortest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:debug": "cross-env PWDEBUG=1 npx playwright test --project=Chromium"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.10.1",
+    "cross-env": "^7.0.3"
+  }
+}
