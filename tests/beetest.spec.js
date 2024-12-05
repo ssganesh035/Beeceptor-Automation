@@ -33,5 +33,5 @@ test('Click on Add A Mock Rule in Beeceptor', async ({ page }) => {
   await page.waitForSelector(addProxy);
   await page.click(addProxy);
 
-  
+  let addcontent;
 });
