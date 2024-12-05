@@ -1,29 +1,31 @@
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require("@playwright/test");
 
-test('Click on Add A Mock Rule in Beeceptor', async ({ page }) => {
-  // 1. Navigate to Beeceptor
-  await page.goto('https://app.beeceptor.com/console/beetest');
-  await page.waitForLoadState('domcontentloaded');
+test("Click on Add A Mock Rule in Beeceptor", async ({ page }) => {
+  await page.goto("https://app.beeceptor.com/console/beetest");
+  await page.waitForLoadState("domcontentloaded");
 
-  const createMockApiSelector = '//h4[contains(@class, "task-title") and text()="Create a Mock API"]';
+  const createMockApiSelector =
+    '//h4[contains(@class, "task-title") and text()="Create a Mock API"]';
   await page.waitForSelector(createMockApiSelector);
 
-  // Click on "Create a Mock API" title
   await page.click(createMockApiSelector);
 
-  const addMockRuleButtonSelector = '//div[@id="details-1"]//button[contains(@class, "action-button")]';
+  const addMockRuleButtonSelector =
+    '//div[@id="details-1"]//button[contains(@class, "action-button")]';
   await page.waitForSelector(addMockRuleButtonSelector);
 
   await page.click(addMockRuleButtonSelector);
 
-  const addNextButton = '//div[@class="driver-popover-footer"]//button[contains(@class, "driver-popover-next-btn")]';
+  const addNextButton =
+    '//div[@class="driver-popover-footer"]//button[contains(@class, "driver-popover-next-btn")]';
 
   await page.waitForSelector(addNextButton);
   await page.click(addNextButton);
 
-  await page.locator('body').click();
+  await page.locator("body").click();
 
-  const addRuleTypes = '//div[@class="btn-group"]//button[contains(@class, "btn btn-default dropdown-toggle")]';
+  const addRuleTypes =
+    '//div[@class="btn-group"]//button[contains(@class, "btn btn-default dropdown-toggle")]';
 
   await page.waitForSelector(addRuleTypes);
   await page.click(addRuleTypes);
@@ -33,5 +35,15 @@ test('Click on Add A Mock Rule in Beeceptor', async ({ page }) => {
   await page.waitForSelector(addProxy);
   await page.click(addProxy);
 
-  let addcontent;
+
+  const dropdownSelector = '//*[@id="proxyEdit.behavior"]';
+  const waitOptionSelector = '//*[@id="proxyEdit.behavior"]/option[@value="wait"]';
+
+  await page.waitForSelector(dropdownSelector);
+  await page.click(dropdownSelector);
+  await page.waitForSelector(waitOptionSelector);
+  await page.click(waitOptionSelector);
+
+
+
 });
