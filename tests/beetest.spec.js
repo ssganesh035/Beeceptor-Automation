@@ -35,15 +35,42 @@ test("Click on Add A Mock Rule in Beeceptor", async ({ page }) => {
   await page.waitForSelector(addProxy);
   await page.click(addProxy);
 
-
-  const dropdownSelector = '//*[@id="proxyEdit.behavior"]';
-  const waitOptionSelector = '//*[@id="proxyEdit.behavior"]/option[@value="wait"]';
-
+  const dropdownSelector = '#proxyEdit\\.behavior'; 
   await page.waitForSelector(dropdownSelector);
-  await page.click(dropdownSelector);
-  await page.waitForSelector(waitOptionSelector);
-  await page.click(waitOptionSelector);
+  await page.click(dropdownSelector)
+  await page.selectOption(dropdownSelector, 'no-wait');
+
+  await page.waitForTimeout(2000);
+
+  await page.selectOption(dropdownSelector, 'wait');
 
 
+  const dropdownMethod = '(//select[@id="matchMethod"])[2]';
+  await page.waitForSelector(dropdownMethod);
+  await page.click(dropdownMethod);
 
+  await page.selectOption(dropdownMethod, 'POST');
+
+  const inputSelector = '#targetEndpoint';
+
+  await page.waitForSelector(inputSelector);
+
+  await page.fill(inputSelector, 'https://your-callback-domain.com');
+  await page.waitForTimeout(2000);
+
+  const addPayload = '#no-transform';
+
+  // Wait for the dropdown to be visible
+  await page.waitForSelector(addPayload, { state: 'visible' });
+  await page.click(addPayload);
+
+  // Step 1: Select "Forward original payload"
+  await page.selectOption(addPayload, { value: 'no-transform' });
+
+  // Step 2: Wait for 2 seconds (if needed)
+  await page.waitForTimeout(2000);
+
+  // Step 3: Select "Build a custom payload"
+  await page.selectOption(addPayload, { value: 'transform' });
+  await page.waitForTimeout(3000);
 });
