@@ -60,17 +60,13 @@ test("Click on Add A Mock Rule in Beeceptor", async ({ page }) => {
 
   const addPayload = '#no-transform';
 
-  // Wait for the dropdown to be visible
   await page.waitForSelector(addPayload, { state: 'visible' });
   await page.click(addPayload);
 
-  // Step 1: Select "Forward original payload"
   await page.selectOption(addPayload, { value: 'no-transform' });
 
-  // Step 2: Wait for 2 seconds (if needed)
   await page.waitForTimeout(2000);
 
-  // Step 3: Select "Build a custom payload"
   await page.selectOption(addPayload, { value: 'transform' });
   await page.waitForTimeout(3000);
 });
